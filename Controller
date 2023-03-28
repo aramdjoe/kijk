@@ -1,3 +1,24 @@
+   <?php
+
+namespace App\Controller;
+
+use App\Entity\Pizza;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+class PizzaController extends AbstractController
+{
+    #[Route('/home', name: 'pizza')]
+    public function index(EntityManagerInterface $em): Response
+    {
+        $catergoies = $em->getRepository(Pizza::class)->findAll();
+        return $this->render('pizza/index.html.twig', [
+            'controller_name' => 'PizzaController',
+        ]);
+    }
+
     #[Route('/category/{id}', name: 'name')]
     public function index1(EntityManagerInterface $em, int $id): Response
     {
