@@ -1,0 +1,9 @@
+    #[Route('/category/{id}', name: 'name')]
+    public function index1(EntityManagerInterface $em, int $id): Response
+    {
+        $category = $em->getRepository(Pizza::class)->find($id);
+        return $this->render('index.html.twig', [
+         'category' =>$category]);
+    }
+
+}
